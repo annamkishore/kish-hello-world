@@ -6,13 +6,11 @@
     http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
-<!-- 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
 
 	<!-- Spring manage ServiceBean -->
 	<bean id="myServ" class="kish.ws.HelloServiceImpl" />
 
 	<!-- JAX-WS Service Endpoint -->
-	<jaxws:endpoint id="myService" implementor="#myServ"
-		address="/helloService" />
+	<jaxws:endpoint id="myService" implementor="#myServ" address="/helloService" />
 
 </beans>

@@ -9,7 +9,7 @@ public class HelloWorldClient{
  
 	public static void main(String[] args) throws Exception {
  
-	URL url = new URL("http://localhost:8080/WSHelloWorld/helloService?wsdl");
+	URL url = new URL("http://localhost:8080/jax-ws-Hello/helloService?wsdl");
  
         //1st argument service URI, refer to wsdl document above
 	//2nd argument is service name, refer to wsdl document above
