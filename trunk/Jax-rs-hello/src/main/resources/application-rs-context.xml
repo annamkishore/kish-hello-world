@@ -7,12 +7,11 @@
 			http://cxf.apache.org/jaxrs
 			http://cxf.apache.org/schemas/jaxrs.xsd">
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:application-ws-context.xml"/>
 	
 	<jaxrs:server id="helloRestServiceID" address="/">
 		<jaxrs:serviceBeans>
 			<ref bean="helloServiceImpl" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
-	<bean id="helloServiceImpl" class="kish.rs.RSHelloService" />
+	<bean id="helloServiceImpl" class="kish.rs.HelloRestService" />
 </beans>

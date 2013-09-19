@@ -1,6 +1,5 @@
 package kish.ws;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
@@ -17,7 +16,7 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	public String sayHello(String name) {
-		Map map = (TreeMap)wsContext.getMessageContext().get(javax.xml.ws.handler.MessageContext.HTTP_REQUEST_HEADERS);
+		TreeMap map = (TreeMap)wsContext.getMessageContext().get(javax.xml.ws.handler.MessageContext.HTTP_REQUEST_HEADERS);
 		System.out.println( "context-------" + wsContext );
 		System.out.println( map );
 		
