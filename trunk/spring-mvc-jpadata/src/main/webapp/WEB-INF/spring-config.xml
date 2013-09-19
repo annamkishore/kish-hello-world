@@ -16,7 +16,7 @@
 
 	<!-- MVC Stuff -->
 	<context:annotation-config />
-	<context:component-scan	base-package="sample.spring.mvc.controller, sample.spring.jpadata.services" />
+	<context:component-scan	base-package="kish.spring.mvc.controller, kish.spring.jpadata.services" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -28,7 +28,7 @@
 	</bean>
 
 	<!-- DB Stuff -->
-	<jpa:repositories base-package="sample.spring.jpadata.repo"></jpa:repositories>
+	<jpa:repositories base-package="kish.spring.jpadata.repo"></jpa:repositories>
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/springjpademo" />
