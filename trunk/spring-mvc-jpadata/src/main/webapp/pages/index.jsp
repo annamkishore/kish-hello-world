@@ -11,7 +11,7 @@
 
 	<h1>Spring MVC, JPA Data Demo</h1>
 
-	<form:form name="indexForm" action="demoController.do" modelAttribute="customer2" method="get">
+	<form:form name="indexForm" action="demoController" modelAttribute="customer2" method="get">
 		<table border="1" bordercolor="#888" cellspacing="0"
 			style="border-collapse: collapse; border-color: rgb(136, 136, 136); border-width: 1px">
 			<tbody>
@@ -23,19 +23,19 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 127px; height: 15px">&nbsp;</td>
-					<td style="width: 62px; height: 15px">&nbsp;Select</td>
-					<td style="width: 201px; height: 15px">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;Select-</td>
+					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="width: 127px; height: 15px">&nbsp;</td>
-					<td style="width: 62px; height: 15px">&nbsp;Update</td>
-					<td style="width: 201px; height: 15px">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;Update</td>
+					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="width: 127px; height: 15px">&nbsp;</td>
-					<td style="width: 62px; height: 15px">&nbsp;Delete</td>
-					<td style="width: 201px; height: 15px">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;Delete</td>
+					<td>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>
