@@ -14,6 +14,15 @@
         				http://www.springframework.org/schema/data/jpa
          				http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:app.properties</value>
+            </array>
+        </property>
+    </bean>
+
+
 	<!-- MVC Stuff -->
 	<context:annotation-config />
 	<context:component-scan	base-package="kish.spring.mvc.controller, kish.spring.jpadata.services" />
@@ -30,10 +39,10 @@
 	<!-- DB Stuff -->
 	<jpa:repositories base-package="kish.spring.jpadata.repo"></jpa:repositories>
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/springjpademo" />
-		<property name="username" value="root" />
-		<property name="password" value="admin" />
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 
 	<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
