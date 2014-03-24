@@ -172,9 +172,6 @@
 	<profiles>
 		<profile>
 			<id>oracle</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<database.url>jdbc:oracle:thin:@172.20.10.111:1521:XE</database.url>
 				<database.user>bursalink1</database.user>
@@ -185,12 +182,16 @@
 		</profile>
 		<profile>
 			<id>derby</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<database.url>jdbc:derby://localhost:1527/Test1</database.url>
 				<database.user>app</database.user>
 				<database.password>app</database.password>
 				<database.driver>org.apache.derby.jdbc.ClientDriver</database.driver>
-				<database.dialect>org.hibernate.dialect.DerbyDialect</database.dialect>
+				<database.dialect>org.hibernate.dialect.DerbyTenSevenDialect</database.dialect>
+<!-- 				DerbyDialect -->
 			</properties>
 		</profile>
 	</profiles>
