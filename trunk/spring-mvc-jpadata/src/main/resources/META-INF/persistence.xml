@@ -11,7 +11,8 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="hibernate.use_sql_comments" value="false" /> 
+						<!-- derby giving an issue if hibernate.use_sql_comments is set to true, for other databases make it true for proper logs of SQL-->
 			<property name="hibernate.dialect" value="${database.dialect}" />
 		</properties>
 	</persistence-unit>
