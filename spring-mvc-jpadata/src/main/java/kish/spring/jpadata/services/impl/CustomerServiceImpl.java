@@ -1,5 +1,7 @@
 package kish.spring.jpadata.services.impl;
 
+import java.util.List;
+
 import kish.spring.jpadata.entities.Customer;
 import kish.spring.jpadata.repo.CustomerRepository;
 import kish.spring.jpadata.services.CustomerService;
@@ -18,5 +20,10 @@ public class CustomerServiceImpl implements CustomerService{
 	@Transactional
 	public void addCustomer(Customer customer) {
 		customerRepo.save(customer);
+	}
+
+	@Override
+	public List<Customer> listCustomers() {
+		return customerRepo.findAll();
 	}
 }

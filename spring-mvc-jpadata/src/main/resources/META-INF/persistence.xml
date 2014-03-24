@@ -8,11 +8,11 @@
         org.hibernate.ejb.HibernatePersistence
     </provider>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-update" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.dialect" value="${database.dialect}" />
 		</properties>
 	</persistence-unit>
 </persistence>

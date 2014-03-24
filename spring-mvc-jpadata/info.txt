@@ -1,4 +1,13 @@
 
+Apache Derby
+	spring-config.xml
+		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+		<property name="url" value="jdbc:derby://localhost:1527/springjpademo" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	persistance.xml
+		<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+
 
 MySQL
 	spring-config.xml

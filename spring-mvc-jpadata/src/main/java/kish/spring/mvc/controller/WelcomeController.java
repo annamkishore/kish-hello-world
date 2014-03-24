@@ -1,5 +1,6 @@
 package kish.spring.mvc.controller;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,8 +23,12 @@ public class WelcomeController {
 	CustomerService customerService;
 	
 	@RequestMapping("/welcome")
-	public String printWelcome(Model model) {
+	public String printWelcome(Model model, Map<String, Object> map) {
 		model.addAttribute("customer2", new Customer());
+
+		List<Customer> customerList = customerService.listCustomers();
+		map.put("customerList", customerList);
+		
 		return "/pages/index";
 	}
 
@@ -45,9 +50,10 @@ public class WelcomeController {
 			customerService.addCustomer(customer);
 			msg = "Success storing in DB";
 		}
-		
+
 		map.put("message", msg);
-			
+		List<Customer> customerList = customerService.listCustomers();
+		map.put("customerList", customerList);
 		return "/pages/index";
 	}
 	

@@ -40,9 +40,17 @@
 	<jpa:repositories base-package="kish.spring.jpadata.repo"></jpa:repositories>
 		<!-- Pooled Data source -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close" p:driverClass="${jdbc.driverClassName}" p:jdbcUrl="${jdbc.url}"
-          p:user="${jdbc.username}" p:password="${jdbc.password}" p:acquireIncrement="1"
-          p:idleConnectionTestPeriod="60" p:maxPoolSize="5" p:maxStatements="50" p:minPoolSize="1"/>
+          destroy-method="close" 
+          p:driverClass="${database.driver}" p:jdbcUrl="${database.url}"
+          p:user="${database.user}" p:password="${database.password}" 
+          p:acquireIncrement="1" p:idleConnectionTestPeriod="60" 
+          p:maxPoolSize="5" p:maxStatements="50" p:minPoolSize="1"/>
+
+<!--           p:driverClass="${database.driver}" p:jdbcUrl="${database.url}" -->
+<!--           p:user="${database.user}" p:password="${database.password}"  -->
+<!--           p:driverClass="oracle.jdbc.OracleDriver" p:jdbcUrl="jdbc:oracle:thin:@172.20.10.111:1521:XE" -->
+<!--           p:user="bursalink1" p:password="bursalink1"  -->
+
 		<!-- 	Driver Manager Data source -->
 <!--             
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
