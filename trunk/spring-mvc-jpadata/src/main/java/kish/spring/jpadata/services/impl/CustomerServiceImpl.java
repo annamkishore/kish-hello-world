@@ -7,6 +7,8 @@ import kish.spring.jpadata.repo.CustomerRepository;
 import kish.spring.jpadata.services.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,11 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public List<Customer> listCustomers() {
 		return customerRepo.findAll();
+	}
+
+	@Override
+	public Page<Customer> listCustomersPage(Pageable pageable) {
+		return customerRepo.findAll(pageable);
 	}
 
 	@Override

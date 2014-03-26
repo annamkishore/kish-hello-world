@@ -14,22 +14,30 @@
         				http://www.springframework.org/schema/data/jpa
          				http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <array>
-                <value>classpath:app.properties</value>
-            </array>
-        </property>
-    </bean>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:app.properties</value>
+			</array>
+		</property>
+	</bean>
 
 
 	<!-- MVC Stuff -->
-<!-- 	<context:annotation-config /> -->
-	<mvc:annotation-driven />
+	<!-- <context:annotation-config /> -->
+	<!-- <mvc:annotation-driven /> -->	<!-- need this for returning json content-->
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableArgumentResolver"></bean>	
+							<!-- need this for Pagenation, i.e to create page.page, page.size params, help from below links -->
+							<!-- http://blog.fawnanddoug.com/2012/05/pagination-with-spring-mvc-spring-data.html -->
+							<!-- http://www.java-allandsundry.com/2012/12/spring-data-jpa-and-pagination.html -->
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
 	<mvc:resources mapping="/js/**" location="/js/" />	<!-- to include javascript files -->
 	<context:component-scan	base-package="kish.spring.mvc.controller, kish.spring.jpadata.services" />
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/</value>
 		</property>
