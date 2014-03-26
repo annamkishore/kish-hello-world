@@ -9,6 +9,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<spring-version>3.1.1.RELEASE</spring-version>
+		<jackson.version>1.9.10</jackson.version>
 	</properties>
 
 
@@ -127,6 +128,13 @@
 			<artifactId>derbyclient</artifactId>
 			<version>10.1.1.0</version>
 		</dependency>
+
+		<!-- Jackson JSON Mapper, for json response -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -191,7 +199,7 @@
 				<database.password>app</database.password>
 				<database.driver>org.apache.derby.jdbc.ClientDriver</database.driver>
 				<database.dialect>org.hibernate.dialect.DerbyTenSevenDialect</database.dialect>
-<!-- 				DerbyDialect -->
+				<!-- DerbyDialect -->
 			</properties>
 		</profile>
 	</profiles>

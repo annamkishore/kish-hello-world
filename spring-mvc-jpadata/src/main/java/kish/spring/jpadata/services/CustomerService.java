@@ -7,4 +7,5 @@ import kish.spring.jpadata.entities.Customer;
 public interface CustomerService {
 	public void addCustomer(Customer customer);
 	public List<Customer> listCustomers();
+	public Customer findCustomerById(Long id);
 }

@@ -5,12 +5,12 @@
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    					http://www.springframework.org/schema/jdbc 
-       					http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
        					http://www.springframework.org/schema/context 
 						http://www.springframework.org/schema/context/spring-context.xsd
        					http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    					http://www.springframework.org/schema/jdbc 
+       					http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
         				http://www.springframework.org/schema/data/jpa
          				http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
 
@@ -24,7 +24,9 @@
 
 
 	<!-- MVC Stuff -->
-	<context:annotation-config />
+<!-- 	<context:annotation-config /> -->
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/js/**" location="/js/" />	<!-- to include javascript files -->
 	<context:component-scan	base-package="kish.spring.mvc.controller, kish.spring.jpadata.services" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
