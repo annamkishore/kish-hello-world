@@ -8,6 +8,8 @@ import kish.spring.jpadata.entities.Customer;
 import kish.spring.jpadata.services.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,6 +59,16 @@ public class WelcomeController {
 		List<Customer> customerList = customerService.listCustomers();
 		map.put("customerList", customerList);
 		return "/pages/index";
+	}
+	
+	
+	@RequestMapping(value="customersPage", method = RequestMethod.GET)
+	public String getCustomersPage(Model model, Pageable pageable) {
+		
+		Page<Customer> custPage = customerService.listCustomersPage(pageable);
+		model.addAttribute("page", custPage);
+		
+		return "/pages/customersPageable";
 	}
 	
 	@RequestMapping("/tabDemo")
