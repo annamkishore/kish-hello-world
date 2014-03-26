@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -61,5 +63,12 @@ public class WelcomeController {
 	public String tabDemoService(Model model, Map<String, Object> map, Locale locale) {
 		
 		return "/tab/Home";
+	}
+	
+	@RequestMapping(value="/customer/{custid}", method = RequestMethod.GET)
+	public @ResponseBody Customer getCustomerById(@PathVariable Long custid) {
+		
+		Customer cust = customerService.findCustomerById(custid);
+		return cust;
 	}
 }
