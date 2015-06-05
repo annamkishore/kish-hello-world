@@ -23,6 +23,8 @@ public class DrawingView extends View {
 	private Path circlePath;
 	private Paint mPaint;
 	
+	private int circleRadius = 6;
+	
 
 	public DrawingView(Context c,AttributeSet attrs) {
 		super(c, attrs);
@@ -88,7 +90,7 @@ public class DrawingView extends View {
 			mY = y;
 
 			circlePath.reset();
-			circlePath.addCircle(mX, mY, 10, Path.Direction.CW);
+			circlePath.addCircle(mX, mY, circleRadius, Path.Direction.CW);
 		}
 	}
 
@@ -123,13 +125,22 @@ public class DrawingView extends View {
 		return true;
 	}
 	
+	// kishore: added methods
 	public void setStrokeWidth(int val) {
 		mPaint.setStrokeWidth(val);
+	}
+	
+	public void setPenColor(int val) {
+		mPaint.setColor(val);
 	}
 	
 	public void clear() {
 //		mCanvas.drawColor(Color.WHITE);
 		mCanvas.drawColor(Color.rgb(0xff, 0xff, 0xff));
 		this.invalidate();
+	}
+	
+	public void setCircleRadius(int circleRadius) {
+		this.circleRadius = circleRadius;
 	}
 }

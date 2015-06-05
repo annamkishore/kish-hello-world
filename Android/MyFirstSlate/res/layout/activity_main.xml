@@ -10,7 +10,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             class="com.kish.myfirstslate.DrawingView"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="100dp"
             android:background="#ffffff" />
 
     <LinearLayout
@@ -22,7 +22,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clear" />
@@ -39,9 +39,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:progress="12" />
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/buttonEraser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:text="Eraser" />
+
+    <Button
+        android:id="@+id/buttonPen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonEraser"
+        android:layout_toRightOf="@+id/buttonEraser"
+        android:text="Pen" />
+
+    <Button
+        android:id="@+id/buttonReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/buttonPen"
+        android:text="Reset" />
     
 </RelativeLayout>
