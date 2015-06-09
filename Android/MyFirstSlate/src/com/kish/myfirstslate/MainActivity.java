@@ -76,29 +76,20 @@ public class MainActivity extends Activity {
 			
 			switch(viewId) {
 			case R.id.buttonClear:
-				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
-				board.clear(color);
-				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
-				board.setPenColor(color);
+				board.clear( getColor(R.id.buttonbg, MainActivity.this) );
+				board.setPenColor( getColor(R.id.buttonfg, MainActivity.this) );
 				break;
 			case R.id.buttonEraser:
-				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
-				board.setPenColor(color);
-//				board.setPenColor(Color.WHITE);
+				board.setPenColor(getColor(R.id.buttonbg, MainActivity.this));
 				break;
 			case R.id.buttonPen:
-				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
-				board.setPenColor(color);
-//				board.setPenColor(Color.GREEN);
+				board.setPenColor(getColor(R.id.buttonfg, MainActivity.this));
 				break;
 			case R.id.buttonReset:
-				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
-				board.setPenColor(color);
-//				board.setPenColor(Color.GREEN);
+				board.setPenColor(getColor(R.id.buttonfg, MainActivity.this));
 				board.setStrokeWidth(12);
 				board.setCircleRadius(12);
-				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
-				board.clear(color);
+				board.clear(getColor(R.id.buttonbg, MainActivity.this));
 				SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
 				seekBar1.setProgress(12);
 				break;
@@ -115,6 +106,10 @@ public class MainActivity extends Activity {
 			}
 		}
 		
+		public int getColor(int viewId, Activity activity) {
+			int color = ((ColorDrawable)activity.findViewById(viewId).getBackground()).getColor();
+			return color;
+		}
 		
 		// SeekBar.OnSeekBarChangeListener: methods
 		@Override

@@ -63,27 +63,6 @@ public class ColorDialogFragment extends DialogFragment{
 			
 			button = (Button) mainActivity.findViewById(mainActivity.currentButton);
 			button.setBackgroundColor(color);
-			
-//			switch(viewId) {
-//			case R.id.Button1:
-//				button = (Button) mainActivity.findViewById(mainActivity.currentButton);
-//				button.setBackgroundColor(Color.BLUE);
-//				
-//				if( mainActivity.currentButton == R.id.buttonfg ) {
-//					mainActivity.board.setPenColor(Color.BLUE);
-//				}
-//				Log.d("kish", "button Blue");
-//				break;
-//			case R.id.buttonRed:
-//				button = (Button) mainActivity.findViewById(mainActivity.currentButton);
-//				button.setBackgroundColor(Color.RED);
-//				
-//				if( mainActivity.currentButton == R.id.buttonfg ) {
-//					mainActivity.board.setPenColor(Color.RED);
-//				}
-//				Log.d("kish", "button Red");
-//				break;
-//			}
 		}
 	}
 
