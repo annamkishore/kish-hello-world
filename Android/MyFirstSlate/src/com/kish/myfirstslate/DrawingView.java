@@ -134,9 +134,10 @@ public class DrawingView extends View {
 		mPaint.setColor(val);
 	}
 	
-	public void clear() {
+	public void clear(int color) {
 //		mCanvas.drawColor(Color.WHITE);
-		mCanvas.drawColor(Color.rgb(0xff, 0xff, 0xff));
+//		mCanvas.drawColor(Color.rgb(0xff, 0xff, 0xff));
+		mCanvas.drawColor(color);
 		this.invalidate();
 	}
 	
