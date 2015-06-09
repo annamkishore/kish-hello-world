@@ -14,14 +14,16 @@ public class DrawingView extends View {
 
 	public int width;
 	public int height;
-	private Bitmap mBitmap;
-	private Canvas mCanvas;
-	private Path mPath;
-	private Paint mBitmapPaint;
 	Context context;
-	private Paint circlePaint;
+
+	private Bitmap mBitmap;
+	private Canvas mCanvas;			// Canvas
+	private Paint mBitmapPaint;
+	
 	private Path circlePath;
-	private Paint mPaint;
+	private Paint circlePaint;		// Pen tip (blue circle)
+	private Path mPath;
+	private Paint mPaint;			// Pen
 	
 	private int circleRadius = 6;
 	
@@ -29,16 +31,18 @@ public class DrawingView extends View {
 	public DrawingView(Context c,AttributeSet attrs) {
 		super(c, attrs);
 		context = c;
+		
 		mPath = new Path();
-		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-		circlePaint = new Paint();
 		circlePath = new Path();
+		
+		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+		
+		circlePaint = new Paint();
 		circlePaint.setAntiAlias(true);
 		circlePaint.setColor(Color.BLUE);
 		circlePaint.setStyle(Paint.Style.STROKE);
 		circlePaint.setStrokeJoin(Paint.Join.MITER);
 		circlePaint.setStrokeWidth(4f);
-
 		
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
