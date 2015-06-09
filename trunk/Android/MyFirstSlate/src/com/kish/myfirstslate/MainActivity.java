@@ -1,8 +1,9 @@
 package com.kish.myfirstslate;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ public class MainActivity extends Activity {
 
 	DrawingView board;
 	SlateListener slateListener;
+	int currentButton; // bgbutton or fgbutton
+	
+	FragmentManager fm = getFragmentManager();
 	
 	// OnCreate - activity life cycle
 	@Override
@@ -34,6 +38,10 @@ public class MainActivity extends Activity {
 	// initializing: listeners, etc
 	void init() {
 		board = (DrawingView)findViewById(R.id.paintBoard);
+//		int color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
+//		board.clear(color);
+//		color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
+//		board.setPenColor(color);
 		
 		slateListener = new SlateListener();
 		
@@ -46,6 +54,10 @@ public class MainActivity extends Activity {
 		buttonPen.setOnClickListener(slateListener);
 		Button buttonReset = (Button) findViewById(R.id.buttonReset);
 		buttonReset.setOnClickListener(slateListener);
+		Button buttonbg = (Button) findViewById(R.id.buttonbg);
+		buttonbg.setOnClickListener(slateListener);
+		Button buttonfg = (Button) findViewById(R.id.buttonfg);
+		buttonfg.setOnClickListener(slateListener);
 		
 		// Pen Size
 		SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
@@ -55,28 +67,50 @@ public class MainActivity extends Activity {
 	// Listener Class
 	class SlateListener implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 	
+		int color;
 		// View.OnClickListener: methods
 		@Override
 		public void onClick(View view) {
 			int viewId = view.getId();
+			ColorDialogFragment colorDlgFrag = new ColorDialogFragment(MainActivity.this);
 			
 			switch(viewId) {
 			case R.id.buttonClear:
-				board.clear();
+				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
+				board.clear(color);
+				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
+				board.setPenColor(color);
 				break;
 			case R.id.buttonEraser:
-				board.setPenColor(Color.WHITE);
+				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
+				board.setPenColor(color);
+//				board.setPenColor(Color.WHITE);
 				break;
 			case R.id.buttonPen:
-				board.setPenColor(Color.GREEN);
+				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
+				board.setPenColor(color);
+//				board.setPenColor(Color.GREEN);
 				break;
 			case R.id.buttonReset:
-				board.setPenColor(Color.GREEN);
+				color = ((ColorDrawable)findViewById(R.id.buttonfg).getBackground()).getColor();
+				board.setPenColor(color);
+//				board.setPenColor(Color.GREEN);
 				board.setStrokeWidth(12);
 				board.setCircleRadius(12);
-				board.clear();
+				color = ((ColorDrawable)findViewById(R.id.buttonbg).getBackground()).getColor();
+				board.clear(color);
 				SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
 				seekBar1.setProgress(12);
+				break;
+			case R.id.buttonbg:
+				colorDlgFrag.show(fm, "Colors...");
+				currentButton = R.id.buttonbg; 
+				Log.d("kish", "button bg");
+				break;
+			case R.id.buttonfg:
+				colorDlgFrag.show(fm, "Colors...");
+				currentButton = R.id.buttonfg; 
+				Log.d("kish", "button fg");
 				break;
 			}
 		}

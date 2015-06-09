@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.kish.helloworld.MainActivity" >
+    tools:context="com.kish.helloworld.MainActivity" 
+    android:background="#CCCCCC">
 
     <!-- This is the view on which we will draw. -->
 	<view
@@ -11,7 +12,7 @@
             android:layout_height="fill_parent"
             class="com.kish.myfirstslate.DrawingView"
             android:layout_marginBottom="100dp"
-            android:background="#ffffff" />
+            android:background="#000000" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -67,5 +68,22 @@
         android:layout_above="@+id/linearLayout1"
         android:layout_toRightOf="@+id/buttonPen"
         android:text="Reset" />
+
+    <Button
+        android:id="@+id/buttonbg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/buttonReset"
+        android:background="#000000"
+        android:text="" />
+
+    <Button
+        android:id="@+id/buttonfg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/buttonbg"
+        android:background="#00FF00" />
     
 </RelativeLayout>
