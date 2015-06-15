@@ -1,17 +1,31 @@
 package com.kish.myfirstslate;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -48,22 +62,95 @@ public class MainActivity extends Activity {
 		// Button Listeners
 		Button buttonClear = (Button) findViewById(R.id.buttonClear);
 		buttonClear.setOnClickListener(slateListener);
-		Button buttonEraser= (Button) findViewById(R.id.buttonEraser);
+		ImageButton buttonEraser= (ImageButton) findViewById(R.id.imageButtonEraser);
 		buttonEraser.setOnClickListener(slateListener);
-		Button buttonPen = (Button) findViewById(R.id.buttonPen);
+		ImageButton buttonPen = (ImageButton) findViewById(R.id.imageButtonPen);
 		buttonPen.setOnClickListener(slateListener);
-		Button buttonReset = (Button) findViewById(R.id.buttonReset);
-		buttonReset.setOnClickListener(slateListener);
 		Button buttonbg = (Button) findViewById(R.id.buttonbg);
 		buttonbg.setOnClickListener(slateListener);
 		Button buttonfg = (Button) findViewById(R.id.buttonfg);
 		buttonfg.setOnClickListener(slateListener);
+
+		ImageButton buttonSave = (ImageButton) findViewById(R.id.imageButtonSave);
+		buttonSave.setOnClickListener(slateListener);		
+		ImageButton buttonShare = (ImageButton) findViewById(R.id.imageButtonShare);
+		buttonShare.setOnClickListener(slateListener);
+		
 		
 		// Pen Size
 		SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
 		seekBar1.setOnSeekBarChangeListener(slateListener);
 	}
 	
+    private static final int SELECT_PHOTO = 100;
+    private String filePath;
+
+    private void saveScreen(View content, boolean forSharing) {
+        try {
+            content.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(content.getDrawingCache());
+            content.setDrawingCacheEnabled(false);
+            
+            File file = getOutputFilePath( forSharing );
+            FileOutputStream ostream = new FileOutputStream(file);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(CompressFormat.PNG, SELECT_PHOTO, stream);
+            ostream.write(stream.toByteArray());
+            ostream.close();
+            
+            if( ! forSharing ) {
+            	Toast.makeText(this, "img saved at " + file.getAbsolutePath(), 0).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(getBaseContext(), "Please insert SD card.", 0).show();
+            e.printStackTrace();
+        }
+    }
+	
+    private File getOutputFilePath(boolean forSharing) {
+        File mediaStorageDir = 
+        		forSharing ? new File(Environment.getExternalStorageDirectory().toString(), "/Android/data/com.kish.myfirstslate/cache/") :
+        					 new File(Environment.getExternalStoragePublicDirectory("MyFirstSlate"), "");
+
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+            return null;
+        }
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + new StringBuilder(String.valueOf(System.currentTimeMillis())).toString() + ".png");
+        this.filePath = "file://" + mediaFile.getAbsolutePath();
+        return mediaFile;
+    }
+    
+    // Back Button
+    public void onBackPressed() {
+    	showAlertDialog();
+    };
+    
+    AlertDialog alert;
+    private void showAlertDialog() {
+        Builder builder = new Builder(this);
+        builder.setMessage("Exit ?   Please rate if liked :)")
+        	   .setCancelable(false)
+        	   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+							            public void onClick(DialogInterface dialog, int which) {
+							                MainActivity.this.finish();
+							            }}
+        			   			 )
+        	   .setNeutralButton("Rate Us", new DialogInterface.OnClickListener() {
+							            public void onClick(DialogInterface dialog, int which) {
+							                try {
+							                    MainActivity.this.startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=com.kish.myfirstslate")));
+							                } catch (Exception e) {
+							                    Toast.makeText(MainActivity.this, "Unable to find Google Play.", 0).show();
+							                }}}
+							        	   )
+               .setNegativeButton("No", new DialogInterface.OnClickListener() {
+							            public void onClick(DialogInterface dialog, int which) {
+							                MainActivity.this.alert.dismiss();
+							            }});
+        this.alert = builder.create();
+        this.alert.show();
+    }
+    
 	// Listener Class
 	class SlateListener implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 	
@@ -79,20 +166,33 @@ public class MainActivity extends Activity {
 				board.clear( getColor(R.id.buttonbg, MainActivity.this) );
 				board.setPenColor( getColor(R.id.buttonfg, MainActivity.this) );
 				break;
-			case R.id.buttonEraser:
+			case R.id.imageButtonEraser:
 				board.setPenColor(getColor(R.id.buttonbg, MainActivity.this));
 				break;
-			case R.id.buttonPen:
+			case R.id.imageButtonPen:
 				board.setPenColor(getColor(R.id.buttonfg, MainActivity.this));
 				break;
-			case R.id.buttonReset:
-				board.setPenColor(getColor(R.id.buttonfg, MainActivity.this));
-				board.setStrokeWidth(12);
-				board.setCircleRadius(12);
-				board.clear(getColor(R.id.buttonbg, MainActivity.this));
-				SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
-				seekBar1.setProgress(12);
+			case R.id.imageButtonSave:
+				saveScreen(board, false);
 				break;
+			case R.id.imageButtonShare:
+                Intent intent = new Intent("android.intent.action.SEND");
+                saveScreen(board, true);
+                Uri screenshotUri = Uri.parse(MainActivity.this.filePath);
+                intent.setType("image/png");
+                intent.putExtra("android.intent.extra.STREAM", screenshotUri);
+                intent.putExtra("android.intent.extra.SUBJECT", "My First Slate Drawing");
+                intent.putExtra("android.intent.extra.TEXT", "Share Via MyFirstSlate");
+                startActivity(Intent.createChooser(intent, "Share Image"));
+				break;
+//			case R.id.buttonReset:
+//				board.setPenColor(getColor(R.id.buttonfg, MainActivity.this));
+//				board.setStrokeWidth(12);
+//				board.setCircleRadius(12);
+//				board.clear(getColor(R.id.buttonbg, MainActivity.this));
+//				SeekBar seekBar1 = (SeekBar) findViewById(R.id.seekBar1);
+//				seekBar1.setProgress(12);
+//				break;
 			case R.id.buttonbg:
 				colorDlgFrag.show(fm, "Colors...");
 				currentButton = R.id.buttonbg; 
