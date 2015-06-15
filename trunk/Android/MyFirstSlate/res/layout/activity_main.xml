@@ -2,17 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.kish.helloworld.MainActivity" 
-    android:background="#CCCCCC">
+    android:background="#CCCCCC"
+    tools:context="com.kish.helloworld.MainActivity" >
 
     <!-- This is the view on which we will draw. -->
-	<view
-            android:id="@+id/paintBoard"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            class="com.kish.myfirstslate.DrawingView"
-            android:layout_marginBottom="100dp"
-            android:background="#000000" />
+
+    <view
+        android:id="@+id/paintBoard"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="100dp"
+        class="com.kish.myfirstslate.DrawingView"
+        android:background="#000000" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -42,48 +43,51 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:progress="12" />
-
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonEraser"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout1"
         android:layout_alignParentLeft="true"
-        android:text="Eraser" />
+        android:layout_alignParentRight="true" >
 
-    <Button
-        android:id="@+id/buttonPen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonEraser"
-        android:layout_toRightOf="@+id/buttonEraser"
-        android:text="Pen" />
+        <ImageButton
+            android:id="@+id/imageButtonPen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/pencil_icon" />
 
-    <Button
-        android:id="@+id/buttonReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_toRightOf="@+id/buttonPen"
-        android:text="Reset" />
+        <ImageButton
+            android:id="@+id/imageButtonEraser"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/eraser_icon" />
+        
+        <ImageButton
+            android:id="@+id/imageButtonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/save_icon" />
+        
+        <ImageButton
+            android:id="@+id/imageButtonShare"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/share_icon" />
+        
+        <Button
+            android:id="@+id/buttonbg"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:background="#000000" />
 
-    <Button
-        android:id="@+id/buttonbg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_toRightOf="@+id/buttonReset"
-        android:background="#000000"
-        android:text="" />
+        <Button
+            android:id="@+id/buttonfg"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:background="#00FF00" />
+        
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonfg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_toRightOf="@+id/buttonbg"
-        android:background="#00FF00" />
-    
 </RelativeLayout>
