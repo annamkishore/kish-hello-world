@@ -83,6 +83,7 @@ public class DrawingView extends View {
 		mPath.moveTo(x, y);
 		mX = x;
 		mY = y;
+		mCanvas.drawPoint(x, y, mPaint);	// bug fix, on touch paint
 	}
 
 	private void touch_move(float x, float y) {
